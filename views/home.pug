@@ -3,4 +3,8 @@ extends layout.pug
 block content
   h3
     p Logistic map:
-      i xn+1 = rxn(1 - xn)
+      i x
+      sub
+        i n
+        +1
+      = rxn(1 - xn)
