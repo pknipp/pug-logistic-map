@@ -1,4 +1,5 @@
 const router = require('express').Router();
+router.get("testpug", (req, res) => res.render('home', { myData: 'Hello data' }));
 router.get("", (req, res) => {
     // Following are used to wrap html string created for server-side rendering.
     let top = "<head><title>Logistic map</title></head><body>";
