@@ -17,12 +17,12 @@ block content
   br
   p(align="center")
     a(href="https://pknipp.github.io/math")
-      Return
+      | Return
     | to the Math APIs page.
     br
     | creator:
     a(href='https://pknipp.github.io/' target='_blank' rel='noopener noreferrer')
-      Peter Knipp
+      | Peter Knipp
     br
     | repo:
     a(href='https://github.com/pknipp/logistic-map' target='_blank' rel='noopener noreferrer')
@@ -42,5 +42,42 @@ block content
     i r
     | , the solutions can be remarkably complex, giving rise to period doubling and chaos. The table below summarizes some of this.  See
     a(href='https://en.wikipedia.org/wiki/Logistic_map' target='_blank' rel='noopener noreferrer')
-      Wikipedia
+      | Wikipedia
     | for more information.
+    table(border)
+      tr
+        th
+          i r
+          sub min
+        th
+          i r
+          sub max
+        th asymptotic behavior
+      tr
+        td 0
+        td 1
+        td converges to zero
+      tr
+        td 1
+        td 3
+        td converges to nonzero value
+      tr
+        td 3
+        td 3.44949
+        td two cycle
+      tr
+        td 3.44949
+        td 3.54409
+        td four cycle
+      tr
+        td 3.54409
+        td 3.56441
+        td eight cycle</td>
+      tr
+        td 3.56441
+        td 3.56995
+        td more period doubling
+      tr
+        td 3.56995
+        td 4
+        td chaos
