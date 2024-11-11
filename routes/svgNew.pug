@@ -1,44 +1,17 @@
-const router = require('express').Router();
-const {parseParams, map} = require("./utils");
+extends layout.pug
 
-router.get('', (req, res) => {
-  res.status(500);
-  res.send(`<p>You neglected to include inputs in the url.</p>`);
-});
-
-router.get('/:rNmaxNmin', (req, res) => {
-  let params = req.params.rNmaxNmin.split("-");
-  let rFactor = Number(params[0]);
-  let [error, ys] = parseParams(params);
-  if (error) {
-    res.status(500);
-    res.send(`<p>${error}</p>`);
-  } else {
-    let svg = {size: {x: 1600, y: 850}, padding: {x: 70, y: 60}};
-    let rect = {size: {x: svg.size.x - svg.padding.x, y: svg.size.y - 2 * svg.padding.y}};
-    svg.el = "<span>This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.</span>";
-    let sizes = ["small", "medium", "large"];
-    let radii = [0.2, 1, 5];
-    let radioButtons = sizes.map(size => (`
-      <input
-        type="radio"
-        name="size"
-        id=${size}
-        value=${size}
+block content
+    span This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
+    button(type="button") Toggle line-visibility
+    each size in #{sizes}
+      input(type="radio", name="size", id="#{size}", value="${size}","
         ${size === "medium" ? "checked" : ""}
       />
       <label for=${size}>${size}</label>
       &nbsp;
     `));
     svg.el = `
-      <div>
-        ${svg.el}
-        &nbsp;
-        <button
-          type="button"
-        >
-          Toggle line-visibility
-        </button>
+
         &nbsp;
         <span>
           Circle size:
