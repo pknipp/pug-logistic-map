@@ -1,45 +1,4 @@
 
-    let n = ys.length;
-    // double size of dots w/each period-doubling transition
-    let r = Math.min(rect.size.x / 2 / (1 + (n - 1) / 2 ** (rFactor < 3 ? 0 : rFactor < 3.44949 ? 1 : rFactor < 3.54409 ? 2 : 3)), rect.size.y / 20);
-    rect.padding = r;
-    let yTicks = [];
-    let nYTicks = 10;
-    for (let i = 0; i <= nYTicks; i++) {
-      y = rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / nYTicks;
-      let g = `<g transform="translate(0, ${y})">`;
-      let tick = `<line x2="-10" stroke="black" />`;
-      let number = `
-        <text
-          x="-25"
-          text-anchor="middle"
-          dy="0.32em"
-        >
-          ${i / nYTicks}
-        </text>
-      `;
-      yTicks.push(`${g}${tick}${number}</g>`)
-    }
-    let yLabel = `
-      <g
-        transform = "translate(-60, ${rect.size.y / 2}) rotate(-90)"
-      >
-        <text
-          text-anchor="middle"
-          dy="0.32em"
-          font-size="20"
-        >
-          x (population ratio)
-        </text>
-      </g>
-    `;
-
-    svg.el += `
-      ${yLabel}
-      <g>
-        ${yTicks}
-      </g>
-    `;
     let xys = ys.map((y, i) => ([
       rect.padding + i * (rect.size.x - 2 * rect.padding) / (n - 1),
       rect.size.y - rect.padding - y * (rect.size.y - 2 * rect.padding),
@@ -119,38 +78,6 @@
     `;
     html += `
       ${svg.el}
-      <script>
-        const toggleVisibility = path => {
-          let visible = path.getAttribute("visibility") === "visible";
-          path.setAttribute("visibility", visible ? "hidden" : "visible");
-        };
-        const setRadii = (circles, newSize) => {
-          let circle0 = circles[0];
-          sizes = ["small", "medium", "large"];
-          let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
-          let currentRadius = Number(circle0.getAttribute("r"));
-          let radiusFactors = [0.2, 1, 5];
-          let rawRadius = currentRadius / radiusFactors[currentIndex];
-          let newIndex = sizes.indexOf(newSize);
-          let newRadius = rawRadius * radiusFactors[newIndex];
-          circles.forEach(circle => {
-            circle.setAttribute("class", newSize);
-            circle.setAttribute("r", newRadius);
-          });
-        }
-        let path = document.getElementsByTagName("path")[0];
-        let button = document.getElementsByTagName("button")[0];
-        button.addEventListener("click", e => {
-          toggleVisibility(path);
-        });
-        let circles = Array.from(document.getElementsByTagName("circle"));
-        let inputs = Array.from(document.getElementsByTagName("input"));
-        inputs.forEach(input => {
-          input.addEventListener("click", e => {
-            setRadii(circles, e.target.getAttribute("value"));
-          });
-        });
-      </script>
     </body>
     </html>`;
     res.send(html);

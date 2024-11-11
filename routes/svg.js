@@ -84,7 +84,7 @@ router.get('/:rNmaxNmin', (req, res) => {
         // `);
       // }
     // });
-    res.render("svg", {sizes, svg, rect, rFactor});
+    res.render("svg", {sizes, svg, rect, rFactor, xys});
   }
 });
 module.exports = router;
