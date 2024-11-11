@@ -2,12 +2,18 @@ extends layout.pug
 
 block content
   script(src="/handlers.js" defer)
-  span This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
-  button(type="button") Toggle line-visibility
-  span Circle size
-  each size in sizes
-    input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=size.isChecked)
-    label(for=`${size.label}`) #{size.label}
+  p(align="center")
+    | This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
+    br
+    span Circle size
+    each size in sizes
+      input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=size.isChecked)
+      label(for=`${size.label}`) #{size.label}
+    button(type="button") Toggle line-visibility
+    br
+    span
+      a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return
+      | to main page.
   svg(height=`${svg.size.y}`, width=`${svg.size.x}`)
     g(transform=`translate(${svg.padding.x}, ${svg.padding.y})`)
       g(transform=`translate(${rect.size.x / 2}, -25)`)
@@ -38,6 +44,3 @@ block content
               g(transform=`translate(${xy[0]}, 0)`)
                 line(y2="10" stroke="black")
                 text(y="25" text-anchor="middle" dy="0.32em") #{i}
-  p(align="center")
-    a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return
-    | to main page.

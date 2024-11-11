@@ -41,11 +41,8 @@ router.get('/:rNmaxNmin', (req, res) => {
       rect.padding + i * (rect.size.x - 2 * rect.padding) / (n - 1),
       rect.size.y - rect.padding - y * (rect.size.y - 2 * rect.padding),
     ]));
-    let points = "";
     let d = "";
-    xys.forEach(([x, y], i) => {
-      d += `${i ? "L" : "M"}${x},${y}`;
-    });
+    xys.forEach(([x, y], i) => d += `${i ? "L" : "M"}${x},${y}`);
     let nMax = 14.14 // from reverse-engineering storybook
     let dN = xys.length / nMax;
     let pow = 10 ** Math.floor(Math.log10(dN));
