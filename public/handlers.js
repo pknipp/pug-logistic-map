@@ -3,6 +3,7 @@ const toggleVisibility = path => {
     path.setAttribute("visibility", visible ? "hidden" : "visible");
 };
 const setRadii = (circles, newSize) => {
+    console.log("top of setRadii");
     let circle0 = circles[0];
     sizes = [
         {
@@ -25,7 +26,7 @@ const setRadii = (circles, newSize) => {
     console.log(currentRadius);
     let rawRadius = currentRadius / sizes[currentIndex].factor;
     console.log(rawRadius);
-    let newIndex = sizes.map(size => size.factor).indexOf(newSize);
+    let newIndex = sizes.map(size => size.label).indexOf(newSize);
     console.log(newIndex);
     let newRadius = rawRadius * sizes[newIndex].factor;
     console.log(newRadius);
@@ -40,6 +41,7 @@ button.addEventListener("click", e => {
   toggleVisibility(path);
 });
 let circles = Array.from(document.getElementsByTagName("circle"));
+console.log("circles = ", circles);
 let inputs = Array.from(document.getElementsByTagName("input"));
 inputs.forEach(input => {
     input.addEventListener("click", e => {
