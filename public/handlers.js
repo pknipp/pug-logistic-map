@@ -1,3 +1,4 @@
+console.log("Hello from handlers.js");
 const toggleVisibility = path => {
     let visible = path.getAttribute("visibility") === "visible";
     path.setAttribute("visibility", visible ? "hidden" : "visible");
