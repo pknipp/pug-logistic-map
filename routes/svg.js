@@ -14,7 +14,7 @@ router.get('/:rNmaxNmin', (req, res) => {
     res.status(500);
     res.send(`<p>${error}</p>`);
   } else {
-    let svg = {size: {x: 1600, y: 850}, padding: {x: 70, y: 60}};
+    let svg = {size: {x: 1600, y: 800}, padding: {x: 70, y: 60}};
     let rect = {size: {x: svg.size.x - svg.padding.x, y: svg.size.y - 2 * svg.padding.y}};
     const sizes = [
       {

@@ -9,10 +9,11 @@ block content
     each size in sizes
       input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=size.isChecked)
       label(for=`${size.label}`) #{size.label}
+    br
     button(type="button") Toggle line-visibility
     br
     span
-      a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return
+      a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return&nbsp;
       | to main page.
   svg(height=`${svg.size.y}`, width=`${svg.size.x}`)
     g(transform=`translate(${svg.padding.x}, ${svg.padding.y})`)
