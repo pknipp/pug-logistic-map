@@ -3,7 +3,6 @@ const toggleVisibility = path => {
     path.setAttribute("visibility", visible ? "hidden" : "visible");
 };
 const setRadii = (circles, newSize) => {
-    console.log("top of setRadii");
     let circle0 = circles[0];
     sizes = [
         {
@@ -20,17 +19,12 @@ const setRadii = (circles, newSize) => {
             isChecked: false,
         },
     ];
-    console.log("newSize = ", newSize);
-    let currentIndex = sizes.map(size => size.label).indexOf(circle0.getAttribute("class"));
-    console.log(currentIndex);
     let currentRadius = Number(circle0.getAttribute("r"));
-    console.log(currentRadius);
+    let labels = sizes.map(size => size.label);
+    let currentIndex = labels.indexOf(circle0.getAttribute("class"));
     let rawRadius = currentRadius / sizes[currentIndex].factor;
-    console.log(rawRadius);
-    let newIndex = sizes.map(size => size.label).indexOf(newSize);
-    console.log(newIndex);
+    let newIndex = labels.indexOf(newSize);
     let newRadius = rawRadius * sizes[newIndex].factor;
-    console.log(newRadius);
     circles.forEach(circle => {
       circle.setAttribute("class", newSize);
       circle.setAttribute("r", newRadius);
@@ -38,11 +32,8 @@ const setRadii = (circles, newSize) => {
 }
 let path = document.getElementsByTagName("path")[0];
 let button = document.getElementsByTagName("button")[0];
-button.addEventListener("click", e => {
-  toggleVisibility(path);
-});
+button.addEventListener("click", e => toggleVisibility(path));
 let circles = Array.from(document.getElementsByTagName("circle"));
-console.log("circles = ", circles);
 let inputs = Array.from(document.getElementsByTagName("input"));
 inputs.forEach(input => {
     input.addEventListener("click", e => {
