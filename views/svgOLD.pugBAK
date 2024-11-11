@@ -1,40 +1,5 @@
-extends layout.pug
-
-block content
-    span This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
-    button(type="button") Toggle line-visibility
-    each size in #{sizes}
-      input(type="radio", name="size", id="#{size}", value="${size}","
-        ${size === "medium" ? "checked" : ""}
-      />
-      <label for=${size}>${size}</label>
-      &nbsp;
-    `));
-    svg.el = `
-        &nbsp;
-        <span>
-          Circle size:
-        </span>
-        ${radioButtons.join("")}
-      </div>
-    `;
-
-    svg.el += `
-      <svg
-        height=${svg.size.y}
-        width=${svg.size.x}
-      >
-    `;
-
-    svg.el += `
-      <g
-        transform="translate(${svg.padding.x}, ${svg.padding.y})"
-      >
-    `;
-    let title = `
-      <g
-        transform="translate(${rect.size.x / 2}, -25)"
-      >
+let title = `
+      
         <text
           text-anchor="middle"
           dy="0.32em"
