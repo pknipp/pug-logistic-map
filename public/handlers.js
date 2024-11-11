@@ -9,17 +9,19 @@ const setRadii = (circles, newSize) => {
         {
             label: "small",
             factor: 0.2,
+            isChecked: false,
         }, {
             label: "medium",
             factor: 1,
+            isChecked: true,
         }, {
             label: "large",
             factor: 5,
+            isChecked: false,
         },
     ];
     let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
     let currentRadius = Number(circle0.getAttribute("r"));
-    let radiusFactors = [0.2, 1, 5];
     let rawRadius = currentRadius / sizes[currentIndex].factor;
     let newIndex = sizes.map(size => size.factor).indexOf(newSize);
     let newRadius = rawRadius * sizes[newIndex].factor;
