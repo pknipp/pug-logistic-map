@@ -46,27 +46,13 @@ router.get('/:rNmaxNmin', (req, res) => {
     xys.forEach(([x, y], i) => {
       d += `${i ? "L" : "M"}${x},${y}`;
     });
-    let xLabelTranslate = rect.size.x / 2;
     let nMax = 14.14 // from reverse-engineering storybook
     let dN = xys.length / nMax;
     let pow = 10 ** Math.floor(Math.log10(dN));
     dN /= pow;
     dN = dN > 5 ? 10 : dN > 2 ? 5 : 2;
     dN *= pow;
-    let xTicks = [];
-    xys.forEach(([x, blah], i) => {
-      if (!(i % dN) && i !== xys.length - 1) {
-        xTicks.push(`
-          <g
-            transform="translate(${x}, 0)"
-          >
-            <line y2="10" stroke="black" />
-            <text y="25" text-anchor="middle" dy="0.32em">${i}</text>
-          </g>
-        `);
-      }
-    });
-    res.render("svg", {sizes, svg, rect, rFactor, xys, r, d});
+    res.render("svg", {sizes, svg, rect, rFactor, xys, r, d, dN});
   }
 });
 module.exports = router;
