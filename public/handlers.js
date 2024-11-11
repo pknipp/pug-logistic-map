@@ -1,4 +1,3 @@
-console.log("Hello from handlers.js");
 const toggleVisibility = path => {
     let visible = path.getAttribute("visibility") === "visible";
     path.setAttribute("visibility", visible ? "hidden" : "visible");
@@ -21,10 +20,15 @@ const setRadii = (circles, newSize) => {
         },
     ];
     let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
+    console.log(currentIndex);
     let currentRadius = Number(circle0.getAttribute("r"));
+    console.log(currentRadius);
     let rawRadius = currentRadius / sizes[currentIndex].factor;
+    console.log(rawRadius);
     let newIndex = sizes.map(size => size.factor).indexOf(newSize);
+    console.log(newIndex);
     let newRadius = rawRadius * sizes[newIndex].factor;
+    console.log(newRadius);
     circles.forEach(circle => {
       circle.setAttribute("class", newSize);
       circle.setAttribute("r", newRadius);
