@@ -59,7 +59,7 @@ router.get('/:rNmaxNmin', (req, res) => {
           class="medium"
           cx=${x}
           cy=${y}
-          r=${r * radii[1] / radii[2]}
+          r=${r * sizes[1].factor / sizes[2].factor}
           fill="transparent"
           stroke="black"
         />
