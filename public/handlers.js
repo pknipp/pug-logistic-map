@@ -20,7 +20,8 @@ const setRadii = (circles, newSize) => {
             isChecked: false,
         },
     ];
-    let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
+    console.log("newSize = ", newSize);
+    let currentIndex = sizes.map(size => size.label).indexOf(circle0.getAttribute("class"));
     console.log(currentIndex);
     let currentRadius = Number(circle0.getAttribute("r"));
     console.log(currentRadius);
