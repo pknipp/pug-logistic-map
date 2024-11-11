@@ -39,3 +39,10 @@ let button = document.getElementsByTagName("button")[0];
 button.addEventListener("click", e => {
   toggleVisibility(path);
 });
+let circles = Array.from(document.getElementsByTagName("circle"));
+let inputs = Array.from(document.getElementsByTagName("input"));
+inputs.forEach(input => {
+    input.addEventListener("click", e => {
+        setRadii(circles, e.target.getAttribute("value"));
+    });
+});
