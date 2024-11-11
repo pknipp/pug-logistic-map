@@ -18,5 +18,5 @@ block content
       - for (let i = 0; i <= 10; i++) {
         g(transform=`translate(0, ${rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / 10})`)
           line(x2="-10" stroke="black")
-          text(x="-25" text-anchor="middle" dy="0.32em") ${i / 10}
+          text(x="-25" text-anchor="middle" dy="0.32em") i / 10
       - }
