@@ -1,17 +1,47 @@
-extends layout.pug
+const router = require('express').Router();
+const {parseParams, map} = require("./utils");
 
-block content
-    span This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
-    button(type="button") Toggle line-visibility
-    each size in #{sizes}
-      input(type="radio", name="size", id="#{size}", value="${size}","
+router.get('', (req, res) => {
+  res.status(500);
+  res.send(`<p>You neglected to include inputs in the url.</p>`);
+});
+
+router.get('/:rNmaxNmin', (req, res) => {
+  let params = req.params.rNmaxNmin.split("-");
+  let rFactor = Number(params[0]);
+  let [error, ys] = parseParams(params);
+  if (error) {
+    res.status(500);
+    res.send(`<p>${error}</p>`);
+  } else {
+    let svg = {size: {x: 1600, y: 850}, padding: {x: 70, y: 60}};
+    let rect = {size: {x: svg.size.x - svg.padding.x, y: svg.size.y - 2 * svg.padding.y}};
+    svg.el = "<span>This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.</span>";
+    svg.el = "<script>console.log('this is hard-wired')</script>";
+    svg.el += '<script>src = "../public/handlers.js"</script>';
+    svg.el += '<script>src = "./handlers.js"</script>';
+    let sizes = ["small", "medium", "large"];
+    let radii = [0.2, 1, 5];
+    let radioButtons = sizes.map(size => (`
+      <input
+        type="radio"
+        name="size"
+        id=${size}
+        value=${size}
         ${size === "medium" ? "checked" : ""}
       />
       <label for=${size}>${size}</label>
       &nbsp;
     `));
     svg.el = `
-
+      <div>
+        ${svg.el}
+        &nbsp;
+        <button
+          type="button"
+        >
+          Toggle line-visibility
+        </button>
         &nbsp;
         <span>
           Circle size:
@@ -172,42 +202,7 @@ block content
       </head>
       <body>
     `;
-    html += `
-      ${svg.el}
-      <script>
-        const toggleVisibility = path => {
-          let visible = path.getAttribute("visibility") === "visible";
-          path.setAttribute("visibility", visible ? "hidden" : "visible");
-        };
-        const setRadii = (circles, newSize) => {
-          let circle0 = circles[0];
-          sizes = ["small", "medium", "large"];
-          let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
-          let currentRadius = Number(circle0.getAttribute("r"));
-          let radiusFactors = [0.2, 1, 5];
-          let rawRadius = currentRadius / radiusFactors[currentIndex];
-          let newIndex = sizes.indexOf(newSize);
-          let newRadius = rawRadius * radiusFactors[newIndex];
-          circles.forEach(circle => {
-            circle.setAttribute("class", newSize);
-            circle.setAttribute("r", newRadius);
-          });
-        }
-        let path = document.getElementsByTagName("path")[0];
-        let button = document.getElementsByTagName("button")[0];
-        button.addEventListener("click", e => {
-          toggleVisibility(path);
-        });
-        let circles = Array.from(document.getElementsByTagName("circle"));
-        let inputs = Array.from(document.getElementsByTagName("input"));
-        inputs.forEach(input => {
-          input.addEventListener("click", e => {
-            setRadii(circles, e.target.getAttribute("value"));
-          });
-        });
-      </script>
-    </body>
-    </html>`;
+    html += svg.el;
     res.send(html);
   }
 });
