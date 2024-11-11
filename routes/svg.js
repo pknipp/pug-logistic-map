@@ -31,6 +31,7 @@ router.get('/:rNmaxNmin', (req, res) => {
         isChecked: false,
       }
     ];
+    
     let titleTranslateX =  = rect.size.x / 2;
 
     let n = ys.length;
