@@ -20,15 +20,15 @@ router.get('/:rNmaxNmin', (req, res) => {
       {
         label: "small",
         radius: 0.2,
-        isChecked: false,
+        isChecked: "",
       },{
         label: "medium",
         radius: 1,
-        isChecked: true,
+        isChecked: "checked",
       },{
         label: "large",
         radius: 5,
-        isChecked: false,
+        isChecked: "",
       }
     ];
 
