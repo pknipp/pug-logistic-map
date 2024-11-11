@@ -36,14 +36,6 @@ router.get('/:rNmaxNmin', (req, res) => {
     // double size of dots w/each period-doubling transition
     let r = Math.min(rect.size.x / 2 / (1 + (n - 1) / 2 ** (rFactor < 3 ? 0 : rFactor < 3.44949 ? 1 : rFactor < 3.54409 ? 2 : 3)), rect.size.y / 20);
     rect.padding = r;
-    let yTicks = [];
-    let nYTicks = 10;
-    let numbers = [...Array(nYTicks + 1)].map((_, i) => i / nYTicks);
-    for (let i = 0; i <= nYTicks; i++) {
-      y = rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / nYTicks;
-
-    }
-    let yLabelTranslateY = rect.size.y / 2;
 
     let xys = ys.map((y, i) => ([
       rect.padding + i * (rect.size.x - 2 * rect.padding) / (n - 1),
@@ -52,16 +44,6 @@ router.get('/:rNmaxNmin', (req, res) => {
     let points = "";
     let d = "";
     xys.forEach(([x, y], i) => {
-      points += `
-        <circle
-          class="medium"
-          cx=${x}
-          cy=${y}
-          r=${r * sizes[1].factor / sizes[2].factor}
-          fill="transparent"
-          stroke="black"
-        />
-      `;
       d += `${i ? "L" : "M"}${x},${y}`;
     });
     let xLabelTranslate = rect.size.x / 2;
@@ -72,19 +54,19 @@ router.get('/:rNmaxNmin', (req, res) => {
     dN = dN > 5 ? 10 : dN > 2 ? 5 : 2;
     dN *= pow;
     let xTicks = [];
-    // xys.forEach(([x, blah], i) => {
-      // if (!(i % dN) && i !== xys.length - 1) {
-        // xTicks.push(`
-          // <g
-            // transform="translate(${x}, 0)"
-          // >
-            // <line y2="10" stroke="black" />
-            // <text y="25" text-anchor="middle" dy="0.32em">${i}</text>
-          // </g>
-        // `);
-      // }
-    // });
-    res.render("svg", {sizes, svg, rect, rFactor, xys, r});
+    xys.forEach(([x, blah], i) => {
+      if (!(i % dN) && i !== xys.length - 1) {
+        xTicks.push(`
+          <g
+            transform="translate(${x}, 0)"
+          >
+            <line y2="10" stroke="black" />
+            <text y="25" text-anchor="middle" dy="0.32em">${i}</text>
+          </g>
+        `);
+      }
+    });
+    res.render("svg", {sizes, svg, rect, rFactor, xys, r, d});
   }
 });
 module.exports = router;
