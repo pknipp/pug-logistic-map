@@ -16,7 +16,7 @@ block content
       rect(height=`${rect.size.y}` width=`${rect.size.x}` fill="transparent" stroke="black")
       let nYTicks = 10;
       - for (let i = 0; i <= 10; i++) {
-        g(transform=`translate(0, ${rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / nYTicks;})`)
+        g(transform=`translate(0, ${rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / nYTicks})`)
           line(x2="-10" stroke="black")
           text(x="-25" text-anchor="middle" dy="0.32em") ${i / 10}
       - }
