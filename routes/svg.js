@@ -19,6 +19,7 @@ router.get('/:rNmaxNmin', (req, res) => {
     svg.el = "<span>This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.</span>";
     svg.el = "<script>console.log('this is hard-wired')</script>";
     svg.el += '<script>src = "../public/handlers.js"</script>';
+    svg.el += '<script>src = "./handlers.js"</script>';
     let sizes = ["small", "medium", "large"];
     let radii = [0.2, 1, 5];
     let radioButtons = sizes.map(size => (`
