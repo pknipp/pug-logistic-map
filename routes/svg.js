@@ -200,42 +200,7 @@ router.get('/:rNmaxNmin', (req, res) => {
       </head>
       <body>
     `;
-    html += `
-      ${svg.el}
-      <script>
-        const toggleVisibility = path => {
-          let visible = path.getAttribute("visibility") === "visible";
-          path.setAttribute("visibility", visible ? "hidden" : "visible");
-        };
-        const setRadii = (circles, newSize) => {
-          let circle0 = circles[0];
-          sizes = ["small", "medium", "large"];
-          let currentIndex = sizes.indexOf(circle0.getAttribute("class"));
-          let currentRadius = Number(circle0.getAttribute("r"));
-          let radiusFactors = [0.2, 1, 5];
-          let rawRadius = currentRadius / radiusFactors[currentIndex];
-          let newIndex = sizes.indexOf(newSize);
-          let newRadius = rawRadius * radiusFactors[newIndex];
-          circles.forEach(circle => {
-            circle.setAttribute("class", newSize);
-            circle.setAttribute("r", newRadius);
-          });
-        }
-        let path = document.getElementsByTagName("path")[0];
-        let button = document.getElementsByTagName("button")[0];
-        button.addEventListener("click", e => {
-          toggleVisibility(path);
-        });
-        let circles = Array.from(document.getElementsByTagName("circle"));
-        let inputs = Array.from(document.getElementsByTagName("input"));
-        inputs.forEach(input => {
-          input.addEventListener("click", e => {
-            setRadii(circles, e.target.getAttribute("value"));
-          });
-        });
-      </script>
-    </body>
-    </html>`;
+    html += "${svg.el}";
     res.send(html);
   }
 });
