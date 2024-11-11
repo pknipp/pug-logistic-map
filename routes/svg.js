@@ -32,8 +32,6 @@ router.get('/:rNmaxNmin', (req, res) => {
       }
     ];
 
-    let titleTranslateX = rect.size.x / 2;
-
     let n = ys.length;
     // double size of dots w/each period-doubling transition
     let r = Math.min(rect.size.x / 2 / (1 + (n - 1) / 2 ** (rFactor < 3 ? 0 : rFactor < 3.44949 ? 1 : rFactor < 3.54409 ? 2 : 3)), rect.size.y / 20);
@@ -86,7 +84,7 @@ router.get('/:rNmaxNmin', (req, res) => {
         // `);
       // }
     // });
-    res.render("svg", {sizes, svg, rect});
+    res.render("svg", {sizes, svg, rect, rFactor});
   }
 });
 module.exports = router;
