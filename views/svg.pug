@@ -6,6 +6,6 @@ block content
   button(type="button") Toggle line-visibility
   span Circle size
   each size in sizes
-    input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked="#{size.isChecked}")
+    input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=`${size.isChecked}`)
     label(for=`${size.label}`) #{size.label}
   svg(height=`${svg.size.y}`, width=`${svg.size.x}`)
