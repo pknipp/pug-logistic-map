@@ -2,46 +2,47 @@ extends layout.pug
 
 block content
   script(src="/handlers.js" defer)
-  p(align="center")
-    | This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
-    br
-    span Circle size:&nbsp;
-    each size in sizes
-      input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=size.isChecked)
-      label(for=`${size.label}`) #{size.label}
-    br
-    button(type="button") Toggle line-visibility
-    br
-    span
-      a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return&nbsp;
-      | to main page.
-  svg(height=`${svg.size.y}`, width=`${svg.size.x}`)
-    g(transform=`translate(${svg.padding.x}, ${svg.padding.y})`)
-      g(transform=`translate(${rect.size.x / 2}, -25)`)
-        text(text-anchor="middle" dy="0.32em" font-size="30")
-          | logistic-map dynamics when growth-rate parameter = #{rFactor}
-      rect(height=`${rect.size.y}` width=`${rect.size.x}` fill="transparent" stroke="black")
-      g(transform = `translate(-60, ${rect.size.y / 2}) rotate(-90)`)
-        text(text-anchor="middle" dy="0.32em" font-size="20")
-          | x (population ratio)
-      g
-        - for (let i = 0; i <= 10; i++) {
-          g(transform=`translate(0, ${rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / 10})`)
-            line(x2="-10" stroke="black")
-            text(x="-25" text-anchor="middle" dy="0.32em") #{i / 10}
-        - }
-      g
-        each xy, i in xys
-          circle(class="medium" cx=`${xy[0]}` cy=`${xy[1]}` r=`${r / 5}` fill="transparent" stroke="black")
-      g
-        path(
-        d=`${d}` stroke="black" fill="transparent" visibility="visible" stroke-width="0.2")
-      g(transform = `translate(0, ${rect.size.y})`)
-        g(transform = `translate(${rect.size.x / 2}, 50)`)
-          text(text-anchor="middle" dy="0.32em" font-size="20") n (generations)
+  div(style="padding-top: 20px; padding-left: 40px; padding-right: 40px;")
+    p(align="center")
+      | This graphic is optimized for a 16-inch MacBook Pro using Chrome at mid-magnification.
+      br
+      span Circle size:&nbsp;
+      each size in sizes
+        input(type="radio" name="size" id=`${size.label}` value=`${size.label}` checked=size.isChecked)
+        label(for=`${size.label}`) #{size.label}
+      br
+      button(type="button") Toggle line-visibility
+      br
+      span
+        a(href="https://logistic-map-ed5bb7ec94fe.herokuapp.com") Return&nbsp;
+        | to main page.
+    svg(height=`${svg.size.y}`, width=`${svg.size.x}`)
+      g(transform=`translate(${svg.padding.x}, ${svg.padding.y})`)
+        g(transform=`translate(${rect.size.x / 2}, -25)`)
+          text(text-anchor="middle" dy="0.32em" font-size="30")
+            | logistic-map dynamics when growth-rate parameter = #{rFactor}
+        rect(height=`${rect.size.y}` width=`${rect.size.x}` fill="transparent" stroke="black")
+        g(transform = `translate(-60, ${rect.size.y / 2}) rotate(-90)`)
+          text(text-anchor="middle" dy="0.32em" font-size="20")
+            | x (population ratio)
+        g
+          - for (let i = 0; i <= 10; i++) {
+            g(transform=`translate(0, ${rect.size.y - rect.padding - i * (rect.size.y - 2 * rect.padding) / 10})`)
+              line(x2="-10" stroke="black")
+              text(x="-25" text-anchor="middle" dy="0.32em") #{i / 10}
+          - }
         g
           each xy, i in xys
-            if (!(i % dN) && i !== xys.length - 1)
-              g(transform=`translate(${xy[0]}, 0)`)
-                line(y2="10" stroke="black")
-                text(y="25" text-anchor="middle" dy="0.32em") #{i}
+            circle(class="medium" cx=`${xy[0]}` cy=`${xy[1]}` r=`${r / 5}` fill="transparent" stroke="black")
+        g
+          path(
+          d=`${d}` stroke="black" fill="transparent" visibility="visible" stroke-width="0.2")
+        g(transform = `translate(0, ${rect.size.y})`)
+          g(transform = `translate(${rect.size.x / 2}, 50)`)
+            text(text-anchor="middle" dy="0.32em" font-size="20") n (generations)
+          g
+            each xy, i in xys
+              if (!(i % dN) && i !== xys.length - 1)
+                g(transform=`translate(${xy[0]}, 0)`)
+                  line(y2="10" stroke="black")
+                  text(y="25" text-anchor="middle" dy="0.32em") #{i}
