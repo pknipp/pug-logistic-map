@@ -1,3 +1,4 @@
+const urlFrag = 'herokuapp.com/3.54-100-0.42';
 const toggleVisibility = path => {
     let visible = path.getAttribute("visibility") === "visible";
     path.setAttribute("visibility", visible ? "hidden" : "visible");
